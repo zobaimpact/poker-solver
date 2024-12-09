@@ -150,9 +150,9 @@ const Game: React.FC = () => {
           <Score>
             {t("Score")}: {score}
           </Score>
-          <div>
+          <GameCardWrapper>
             <h2>{t("Your Hand")}</h2>
-            <div style={{ fontSize: "24px", margin: "10px" }}>
+            <div style={{ fontSize: "24px" }} className="game_card">
               {hand.map((card, index) => (
                 <span
                   key={index}
@@ -163,7 +163,7 @@ const Game: React.FC = () => {
                 </span>
               ))}
             </div>
-          </div>
+          </GameCardWrapper>
           <div>
             <h2>{t("What is the hand ranking?")}</h2>
             {options.map((option, index) => (
@@ -209,6 +209,19 @@ export const Btn = styled(Button)`
   background-color: ${Colors.PRIMARY};
   font-size: 1rem;
   box-shadow: 0 1px 30px 1px rgba(0, 0, 0, 0.11);
+`;
+
+const GameCardWrapper = styled.div`
+  width: fit-content;
+  min-width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  .game_card {
+    margin-bottom: 1rem;
+  }
 `;
 
 const Score = styled.div`

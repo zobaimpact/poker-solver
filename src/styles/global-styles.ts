@@ -37,8 +37,8 @@ ${normalize}
     }
 
     .suits_cards{
-      width: 100px;
-      height: 80px;
+      width: 100px !important;
+      height: 80px !important;
       background: red;
       padding: 0.5rem;
       border-radius: 4px;
