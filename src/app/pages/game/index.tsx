@@ -230,7 +230,6 @@ export const Btn = styled(Button)`
 `;
 
 const GameCardWrapper = styled.div`
-  width: fit-content;
   min-width: 100%;
   display: flex;
   align-items: center;
