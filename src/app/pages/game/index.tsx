@@ -7,9 +7,9 @@ import { Button } from "reactstrap";
 import GameOverScreen from "../../components/GameOver";
 import { generateHand, shuffleArray } from "../../utils/gameUtils";
 import { HAND_RANKS } from "../../../constants/Game";
-import P from "../../components/Typograph/P";
 import { Colors } from "../../../constants";
 import { useTranslation } from "react-i18next";
+import MusicBars from "../../components/MusicEffect";
 
 const Game: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -24,6 +24,7 @@ const Game: React.FC = () => {
   const [isGameOver, setIsGameOver] = useState(false);
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const audioRef = useRef(new Audio("/audio/kenny.mp3"));
+  const colors = ["#00cec8", "#81daca", "#00b9b3", "#005451", "#008fd1"];
 
   // Start a new round
   const startNewRound = () => {
@@ -48,7 +49,6 @@ const Game: React.FC = () => {
       setScore((prev) => prev + 1);
       setTimeLeft((prev) => prev + 5);
     }
-    fetchFunnyMessage();
     startNewRound();
   };
 
@@ -69,6 +69,7 @@ const Game: React.FC = () => {
   const endGame = () => {
     setIsGameOver(true);
     setPreviousScores((prev) => [...prev, score]);
+    fetchFunnyMessage();
   };
 
   // Restart the game
@@ -134,6 +135,7 @@ const Game: React.FC = () => {
 
       {isGameOver ? (
         <GameOverScreen
+          funnyMessage={funnyMessage}
           score={score}
           previousScores={previousScores}
           restartGame={restartGame}
@@ -153,17 +155,28 @@ const Game: React.FC = () => {
           <GameCardWrapper>
             <h2>{t("Your Hand")}</h2>
             <div style={{ fontSize: "24px" }} className="game_card">
-              {hand.map((card, index) => (
-                <span
-                  key={index}
-                  style={{ margin: "5px" }}
-                  className="suits_cards"
-                >
-                  {card}
-                </span>
-              ))}
+              {hand.map((card, index) => {
+                const backgroundColor = colors[index % colors.length];
+
+                return (
+                  <span
+                    key={index}
+                    style={{
+                      margin: "5px",
+                      padding: "10px",
+                      borderRadius: "5px",
+                      backgroundColor,
+                      color: "#fff",
+                    }}
+                    className="suits_cards"
+                  >
+                    {card}
+                  </span>
+                );
+              })}
             </div>
           </GameCardWrapper>
+
           <div>
             <h2>{t("What is the hand ranking?")}</h2>
             {options.map((option, index) => (
@@ -176,7 +189,6 @@ const Game: React.FC = () => {
               </Btn>
             ))}
           </div>
-          {funnyMessage && <P>{funnyMessage}</P>}
 
           <Button
             onClick={() => setIsMusicPlaying(!isMusicPlaying)}
@@ -184,6 +196,12 @@ const Game: React.FC = () => {
           >
             {isMusicPlaying ? t("Pause Music") : t("Play Music")}
           </Button>
+          {isMusicPlaying && (
+            <div className="music_effect">
+              {" "}
+              <MusicBars />
+            </div>
+          )}
         </div>
       )}
     </div>
@@ -220,7 +238,10 @@ const GameCardWrapper = styled.div`
   justify-content: center;
 
   .game_card {
-    margin-bottom: 1rem;
+    margin: 2rem;
+  }
+  h2 {
+    margin: 1rem;
   }
 `;
 

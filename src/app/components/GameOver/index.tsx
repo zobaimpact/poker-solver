@@ -1,16 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import { Button } from "reactstrap";  
+import P from "../../components/Typograph/P";
+
 interface GameOverScreenProps {
   score: number;
   previousScores: number[];
   restartGame: () => void;
+  funnyMessage: string;
 }
 
 const GameOverScreen: React.FC<GameOverScreenProps> = ({
   score,
   previousScores,
   restartGame,
+  funnyMessage
 }) => {
   return (
     <div>
@@ -24,6 +28,8 @@ const GameOverScreen: React.FC<GameOverScreenProps> = ({
           </List>
         ))}
       </ul>
+      {funnyMessage && <P>{funnyMessage}</P>}
+
       <Btn onClick={restartGame}>Play Again</Btn>
     </div>
   );

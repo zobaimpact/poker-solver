@@ -76,6 +76,14 @@ ${normalize}
         }
     }
 
+    .music_effect{
+      width: 100%;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
 
     *::-webkit-scrollbar {
         width: 5px;
@@ -113,4 +121,45 @@ ${normalize}
      justify-content: center;
         
     }
+
+    // Music bars css
+
+    .music-bars {
+  display: flex;
+  gap: 5px;
+}
+
+.bar {
+  width: 10px;
+  height: 10px;
+  background: linear-gradient(180deg, #ff0066, #ffcc00);
+  animation: bounce 1s infinite ease-in-out;
+}
+
+.bar:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.bar:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.bar:nth-child(4) {
+  animation-delay: 0.6s;
+}
+
+.bar:nth-child(5) {
+  animation-delay: 0.8s;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(2.5);
+  }
+}
+
+
 `;
