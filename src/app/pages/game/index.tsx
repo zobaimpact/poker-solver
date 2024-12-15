@@ -24,7 +24,7 @@ const Game: React.FC = () => {
   const [isGameOver, setIsGameOver] = useState(false);
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const audioRef = useRef(new Audio("/audio/kenny.mp3"));
-  const colors = ["#00cec8", "#81daca", "#00b9b3", "#005451", "#008fd1"];
+  const colors = ["#000000", "#cc0000", "#333333", "#ffcf40", "#000000"];
 
   // Start a new round
   const startNewRound = () => {
